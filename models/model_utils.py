@@ -28,5 +28,3 @@ def get_model(device = torch.device("cpu"), ckpt_path = None, features = 32, mod
         return model, midas_transform, net_w, net_h
     
 
-if __name__ == "__main__":
-    get_model(model_type="dpt_beit_large_512")
