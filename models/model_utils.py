@@ -21,10 +21,12 @@ midas_models = {
 
 def get_model(device = torch.device("cpu"), ckpt_path = None, features = 32, model_type='efficientnet_lite3'):
     if model_type in ["efficientnet_lite3", "efficientnet_lite2"]:
-        model = Efficientnet(features=features, backbone_type = model_type)
+        model = Efficientnet(features=features, backbone = model_type)
+        print("Model loaded, number of parameters = {:.0f}M".format(sum(p.numel() for p in model.parameters()) / 1e6))
         return model
     if model_type in midas_models:
         model, midas_transform, net_w, net_h = model_loader.load_model(device, ckpt_path, model_type)
+        print("Model loaded, number of parameters = {:.0f}M".format(sum(p.numel() for p in model.parameters()) / 1e6))
         return model, midas_transform, net_w, net_h
     
 

@@ -185,7 +185,7 @@ def main():
         args.rank = int(os.environ["RANK"])
         args.local_rank = int(os.environ["LOCAL_RANK"])
         args.world_size = int(os.environ["WORLD_SIZE"])
-        dist.init_process_group("nccl")
+        dist.init_process_group("gloo")
     except KeyError:
         rank = 0
         local_rank = 0
@@ -199,7 +199,6 @@ def main():
     
     device = torch.device(f"cuda:{args.local_rank}")
     abs_depth_eval_metrics = ['silog', 'abs_rel', 'log10', 'rms', 'sq_rel', 'log_rms', 'd1', 'd2', 'd3']
-    print(args)
-    
+
 if __name__ == "__main__":
     main()

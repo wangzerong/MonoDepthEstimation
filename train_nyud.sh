@@ -1,9 +1,9 @@
 CUDA_VISIBLE_DEVICES=0 \
-torchrun --nproc_per_node=1 \
+torchrun --nproc_per_node=2 \
 main.py \
 --mode train \
 --exp_name_pre NYUD_L1Loss \
---encoder_type efficientnet_lite3 \
+--encoder efficientnet_lite3 \
 --dataset NYUD \
 --dataset_path data_utils/nyud_train.json \
 --input_height 480 \
