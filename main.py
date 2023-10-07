@@ -199,6 +199,10 @@ def main():
     
     device = torch.device(f"cuda:{args.local_rank}")
     abs_depth_eval_metrics = ['silog', 'abs_rel', 'log10', 'rms', 'sq_rel', 'log_rms', 'd1', 'd2', 'd3']
+    if args.ddp:
+        model =  torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.local_rank], output_device = [args.local_rank], find_unused_parameters=True)
+    else:
+        model = torch.nn.parallel.DataParallel(model)
 
 if __name__ == "__main__":
     main()
